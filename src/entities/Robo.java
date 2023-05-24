@@ -2,18 +2,23 @@ package entities;
 
 public class Robo {	
 	
-public Robo(int posicaoX, int posicaoY) {
+public Robo(int posicaoX, int posicaoY, double energia) {
 		super();
 		this.posicaoX = posicaoX;
 		this.posicaoY = posicaoY;
+		this.energia = energia;
 	}
 
 
 int posicaoX, posicaoY; 
-double distPercorrida;
+double distPercorrida, energia;
 
 public double getDistPercorrida() {
 	return distPercorrida;
+}
+
+public double getEnergia() {
+	return energia;
 }
 
 public int getPosicaoX() {
@@ -38,25 +43,45 @@ public void getPosicao() {
 
 
 public void moveUp(int passos) {
-	setPosicaoY(posicaoY+passos);
-	this.distPercorrida += passos/10;
+	if (distPercorrida + passos/10 < energia) {
+		setPosicaoY(posicaoY+passos);
+		this.distPercorrida += (double)passos/10;
+	} else {
+		setPosicaoY(posicaoY + (int)((energia - distPercorrida)*10));
+		this.distPercorrida = energia;
+	}
 }
 	
 public void moveDown(int passos) {
-	setPosicaoY(posicaoY-passos);
-	this.distPercorrida += passos/10;
+	if (distPercorrida + passos/10 < energia) {
+		setPosicaoY(posicaoY-passos);
+		this.distPercorrida += (double)passos/10;
+	} else {
+		setPosicaoY(posicaoY - (int)((energia - distPercorrida)*10));
+		this.distPercorrida = energia;
+	}
 }
 	
 	
 public void moveLeft(int passos) {
-	setPosicaoX(posicaoX-passos);
-	this.distPercorrida += passos/10;
+	if (distPercorrida + passos/10 < energia) {
+		setPosicaoX(posicaoX-passos);
+		this.distPercorrida += (double)passos/10;
+	} else {
+		setPosicaoX(posicaoX - (int)((energia - distPercorrida)*10));
+		this.distPercorrida = energia;
+	}
 }
 	
 	
 public void moveRight(int passos) {
-	setPosicaoX(posicaoX+passos);
-	this.distPercorrida += passos/10;
+	if (distPercorrida + passos/10 < energia) {
+		setPosicaoX(posicaoX+passos);
+		this.distPercorrida += (double)passos/10;
+	} else {
+		setPosicaoX(posicaoX + (int)((energia - distPercorrida)*10));
+		this.distPercorrida = energia;
+	}
 }
 	
 	
